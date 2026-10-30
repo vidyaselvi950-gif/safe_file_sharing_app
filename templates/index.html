@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}SafeShare - Secure File Sharing{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Secure file sharing made simple.</h1>
+    <p>Upload files, encrypt them with AES-256-GCM, and create controlled sharing links with passwords, expiry times, and download limits.</p>
+    <a class="btn" href="{{ url_for('register') }}">Get Started</a>
+    <a class="btn secondary" href="{{ url_for('login') }}">Login</a>
+  </div>
+  <div class="card features">
+    <h3>Security Features</h3>
+    <ul>
+      <li>AES-256-GCM encryption at rest</li>
+      <li>Hashed account passwords</li>
+      <li>Random share tokens</li>
+      <li>Optional share passwords</li>
+      <li>Expiry and download limits</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

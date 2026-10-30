@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>My Files</h1>
+<div class="card">
+<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="upload">
+<input type="file" name="file" required>
+<button class="btn">Upload & Encrypt</button>
+</form>
+<small>Maximum 25 MB. Allowed: PDF, Office, images, TXT, CSV and ZIP.</small>
+</div>
+
+<div class="card">
+<h2>Uploaded Files</h2>
+{% if files %}
+<table>
+<tr><th>Name</th><th>Size</th><th>Uploaded</th><th>Actions</th></tr>
+{% for f in files %}
+<tr>
+<td>{{ f.original_name }}</td>
+<td>{{ "%.1f"|format(f.size/1024) }} KB</td>
+<td>{{ f.uploaded_at[:19].replace("T"," ") }} UTC</td>
+<td class="actions">
+<a class="btn small" href="{{ url_for('download', file_id=f.id) }}">Download</a>
+<a class="btn small" href="{{ url_for('create_share', file_id=f.id) }}">Share</a>
+<form method="post" action="{{ url_for('delete_file', file_id=f.id) }}" onsubmit="return confirm('Delete this file and all its share links?')">
+<button class="danger small">Delete</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}<p>No files uploaded yet.</p>{% endif %}
+</div>
+
+<div class="card">
+<h2>Share Links</h2>
+{% if shares %}
+<table>
+<tr><th>File</th><th>Expires</th><th>Downloads</th><th>Limit</th><th>Link</th></tr>
+{% for s in shares %}
+<tr>
+<td>{{ s.original_name }}</td>
+<td>{{ s.expires_at[:19].replace("T"," ") }} UTC</td>
+<td>{{ s.downloads }}</td>
+<td>{{ s.max_downloads }}</td>
+<td><a href="{{ url_for('shared_file', token=s.token, _external=True) }}">Open link</a></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}<p>No share links created.</p>{% endif %}
+</div>
+{% endblock %}

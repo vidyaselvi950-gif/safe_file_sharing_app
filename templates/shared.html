@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Shared File{% endblock %}
+{% block content %}
+<div class="form-card">
+<h2>Shared File</h2>
+<p>File: <strong>{{ share.original_name }}</strong></p>
+<p>Downloads remaining: <strong>{{ share.max_downloads - share.downloads }}</strong></p>
+<p>Expires: {{ share.expires_at[:19].replace("T"," ") }} UTC</p>
+<form method="post">
+{% if protected %}
+<label>Share password</label>
+<input type="password" name="password" required>
+{% endif %}
+<button class="btn">Download Securely</button>
+</form>
+</div>
+{% endblock %}

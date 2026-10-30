@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Share Unavailable{% endblock %}
+{% block content %}
+<div class="form-card">
+<h2>Share Unavailable</h2>
+<p>{{ message }}</p>
+<a class="btn" href="{{ url_for('index') }}">Go Home</a>
+</div>
+{% endblock %}

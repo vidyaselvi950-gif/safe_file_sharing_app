@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Create Share Link{% endblock %}
+{% block content %}
+<div class="form-card">
+<h2>Create Secure Share Link</h2>
+<p>File: <strong>{{ file.original_name }}</strong></p>
+<form method="post">
+<label>Expiry (hours)</label>
+<input type="number" name="hours" value="24" min="1" max="168" required>
+<label>Maximum downloads</label>
+<input type="number" name="max_downloads" value="5" min="1" max="100" required>
+<label>Optional share password</label>
+<input type="password" name="share_password" minlength="6" placeholder="Leave blank for no password">
+<button class="btn">Create Link</button>
+</form>
+</div>
+{% endblock %}

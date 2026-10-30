@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Share Created{% endblock %}
+{% block content %}
+<div class="form-card">
+<h2>Secure Share Link Created</h2>
+<p><strong>{{ file.original_name }}</strong></p>
+<label>Share URL</label>
+<input value="{{ link }}" readonly onclick="this.select()">
+<p>Expires: {{ expires.strftime("%Y-%m-%d %H:%M UTC") }}</p>
+<div class="warning">Copy this link now. The application does not display a separate secret key later.</div>
+<a class="btn" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</div>
+{% endblock %}
